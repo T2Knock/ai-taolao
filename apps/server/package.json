@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "server",
   "version": "1.0.0",
   "description": "",
@@ -7,10 +6,10 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "run-p dev:*",
-    "dev:esbuild": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm --watch",
+    "dev:esbuild": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --watch",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "dev:node": "node --watch dist/index.js",
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=esm",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js",
     "lint": "eslint src/",
     "typecheck": "tsc"
   },
@@ -18,8 +17,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/autoload": "^5.10.0",
     "drizzle-orm": "^0.31.4",
     "fastify": "^4.28.1",
+    "fastify-plugin": "^4.5.1",
     "mysql2": "^3.10.2"
   },
   "devDependencies": {
