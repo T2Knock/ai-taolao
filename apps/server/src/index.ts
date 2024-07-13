@@ -1,25 +1,35 @@
-import Fastify from "fastify";
+import { join } from 'path'
+import Fastify from 'fastify'
+import autoLoad from '@fastify/autoload'
 
 const fastify = Fastify({
-  logger: true,
-});
-
-fastify.get("/", () => {
-  return { hello: "world" };
-});
-
-/**
- * Run the server!
- */
-const start = async (): Promise<void> => {
-  try {
-    await fastify.listen({ port: 3000 });
-  } catch (err) {
-    fastify.log.error(err);
-    process.exit(1);
+  logger: {
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        destination: 1,
+        colorize: true,
+        translateTime: 'HH:MM:ss.l',
+        ignore: 'pid,hostname'
+      }
+    }
   }
-};
+})
+fastify.register(autoLoad, {
+  dir: join(__dirname, 'plugins')
+})
 
-start().catch((error) => {
-  fastify.log.error(error);
-});
+fastify.register(autoLoad, {
+  dir: join(__dirname, 'routes')
+})
+
+const start = async () => {
+  try {
+    await fastify.listen({ port: 3000 })
+  } catch (err) {
+    fastify.log.error(err)
+    process.exit(1)
+  }
+}
+
+start()
