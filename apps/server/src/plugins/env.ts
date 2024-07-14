@@ -22,9 +22,6 @@ export default fp(async (fastify) => {
       fastify.log.error(err);
       process.exit(1);
     }
-
-    fastify.log.info(fastify.config);
-    fastify.log.info(fastify.getEnvs());
   });
 
   await fastify.after();
