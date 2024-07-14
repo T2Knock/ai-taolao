@@ -13,7 +13,7 @@ This project aim to build a basic demo with LLM and understand the in and out of
 
 ### Project Structure
 
-The project use a basic example structure for a monorepo setup. Don't care too much about the **packages**, it's meant to be use for sharing resources but currently doesn't have any resources to share.
+The project use a basic example structure for a _monorepo_ setup. Don't care too much about the **packages**, it's meant to be use for sharing resources but currently doesn't have any resources to share.
 
 All the application will be located in the **apps** folder. Each run their own structure.
 
