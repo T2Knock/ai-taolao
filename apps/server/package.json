@@ -1,0 +1,44 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src",
+    "build": "rm -rf dist && tsx esbuild.ts",
+    "start": "npm run build && node dist",
+    "format": "prettier --write src",
+    "lint": "prettier --check src && eslint --ignore-path .gitignore .",
+    "ci": "npm format && npm lint",
+    "typecheck": "tsc"
+  },
+  "keywords": [],
+  "author": "@ai-taolao",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/autoload": "^5.10.0",
+    "@fastify/env": "^4.4.0",
+    "@fastify/sensible": "5.6.0",
+    "@fastify/swagger": "8.14.0",
+    "@fastify/swagger-ui": "^4.0.0",
+    "drizzle-orm": "^0.32.0",
+    "fastify": "^4.28.1",
+    "fastify-plugin": "^4.5.1",
+    "mysql2": "^3.10.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "esbuild": "0.21.0",
+    "esbuild-plugin-pino": "2.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "json-schema-to-ts": "3.1.0",
+    "pino": "9.2.0",
+    "pino-pretty": "11.2.1",
+    "prettier": "3.3.2",
+    "thread-stream": "3.1.0",
+    "tiny-glob": "0.2.9",
+    "tsx": "4.16.2",
+    "typescript": "5.5.3"
+  }
+}

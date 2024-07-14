@@ -1,29 +1,45 @@
-# Create T3 App
+# Project Title
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+AI-taolao is a simple LLM powered chatbot.
 
-## What's next? How do I make an app with this?
+## Description
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+This project aim to build a basic demo with LLM and understand the in and out of building LLM applications and concepts. It's a full stack app with a **monorepo** setup with [Turborepo](https://turbo.build/repo).
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- [NextJS](https://nextjs.org) use for the frontend
+- [Fastify](https://fastify.dev/) use for the backend
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Getting Started
 
-## Learn More
+### Project Structure
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+The project use a basic example structure for a monorepo setup. Don't care too much about the **packages**, it's meant to be use for sharing resources but currently doesn't have any resources to share.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+All the application will be located in the **apps** folder. Each run their on their own structure.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+```sh
+.
+├── apps
+│   ├── server
+│   └── web
+└── packages
+    ├── eslint-config
+    └── typescript-config
+```
 
-## How do I deploy this?
+### Development
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Running dev on the root run both the server and the web front end. This use turbo to run what specify in the app **package.json** for the `npm run dev` script
+
+```
+// Run both in parallel
+npm run dev
+
+// To run the frontend only
+npm run dev:frontend
+
+// Same go for the back end
+npm run dev:backend
+```
+
+If large directory source make you wanna vomit because of complexity, `cd` into specific folder and run `npm run dev` to work only on a specific part.
