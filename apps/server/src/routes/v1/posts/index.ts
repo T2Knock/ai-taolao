@@ -1,4 +1,4 @@
-import type { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify';
 import {
   postSchema,
   postNotFoundSchema,
@@ -7,21 +7,21 @@ import {
   postPostsSchema,
   putPostsSchema,
   deletePostsSchema
-} from './schema'
+} from './schema';
 import {
   getPostsHandler,
   getOnePostHandler,
   postPostsHandler,
   putPostsHandler,
   deletePostsHandler
-} from './handler'
+} from './handler';
 
 export default async (fastify: FastifyInstance) => {
-  fastify.addSchema(postSchema)
-  fastify.addSchema(postNotFoundSchema)
-  fastify.get('/', { schema: getPostsSchema }, getPostsHandler)
-  fastify.get('/:postid', { schema: getOnePostSchema }, getOnePostHandler)
-  fastify.post('/', { schema: postPostsSchema }, postPostsHandler)
-  fastify.put('/:postid', { schema: putPostsSchema }, putPostsHandler)
-  fastify.delete('/:postid', { schema: deletePostsSchema }, deletePostsHandler)
-}
+  fastify.addSchema(postSchema);
+  fastify.addSchema(postNotFoundSchema);
+  fastify.get('/', { schema: getPostsSchema }, getPostsHandler);
+  fastify.get('/:postid', { schema: getOnePostSchema }, getOnePostHandler);
+  fastify.post('/', { schema: postPostsSchema }, postPostsHandler);
+  fastify.put('/:postid', { schema: putPostsSchema }, putPostsHandler);
+  fastify.delete('/:postid', { schema: deletePostsSchema }, deletePostsHandler);
+};

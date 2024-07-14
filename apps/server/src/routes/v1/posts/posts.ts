@@ -23,4 +23,4 @@ export const posts = [
     tags: ['featured', 'popular', 'trending'],
     deleted: false
   }
-]
+];

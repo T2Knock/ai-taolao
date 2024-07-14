@@ -1,4 +1,4 @@
-import fp from 'fastify-plugin'
+import fp from 'fastify-plugin';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SupportPluginOptions {
@@ -9,13 +9,13 @@ export interface SupportPluginOptions {
 // to export the decorators to the outer scope
 export default fp<SupportPluginOptions>(async (fastify) => {
   fastify.decorate('someSupport', function () {
-    return 'hugs'
-  })
-})
+    return 'hugs';
+  });
+});
 
 // When using .decorate you have to specify added properties for Typescript
 declare module 'fastify' {
   export interface FastifyInstance {
-    someSupport(): string
+    someSupport(): string;
   }
 }

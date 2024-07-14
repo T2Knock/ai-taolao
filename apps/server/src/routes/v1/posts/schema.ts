@@ -1,5 +1,5 @@
-import type { FastifySchema } from 'fastify'
-import { FromSchema } from 'json-schema-to-ts'
+import type { FastifySchema } from 'fastify';
+import { FromSchema } from 'json-schema-to-ts';
 
 // Shared Schema
 export const postSchema = {
@@ -14,7 +14,7 @@ export const postSchema = {
     deleted: { type: 'boolean' }
   },
   required: ['title', 'published', 'content', 'tags', 'deleted']
-} as const
+} as const;
 
 // Not found Schema
 export const postNotFoundSchema = {
@@ -25,9 +25,9 @@ export const postNotFoundSchema = {
     error: { type: 'string' }
   },
   additionalProperties: false
-} as const
+} as const;
 
-export type PostNotFound = FromSchema<typeof postNotFoundSchema>
+export type PostNotFound = FromSchema<typeof postNotFoundSchema>;
 
 // Params Schema
 const paramsSchema = {
@@ -37,9 +37,9 @@ const paramsSchema = {
     postid: { type: 'number' }
   },
   additionalProperties: false
-} as const
+} as const;
 
-export type Params = FromSchema<typeof paramsSchema>
+export type Params = FromSchema<typeof paramsSchema>;
 
 // Query Schema
 const querystringSchema = {
@@ -48,12 +48,12 @@ const querystringSchema = {
     deleted: { type: 'boolean' }
   },
   additionalProperties: false
-} as const
+} as const;
 
-export type Querystring = FromSchema<typeof querystringSchema>
+export type Querystring = FromSchema<typeof querystringSchema>;
 
 // Body Schema
-export type Body = FromSchema<typeof postSchema>
+export type Body = FromSchema<typeof postSchema>;
 
 // Response Schema
 const replySchema = {
@@ -65,12 +65,12 @@ const replySchema = {
     }
   },
   additionalProperties: false
-} as const
+} as const;
 
 export type Reply = FromSchema<
   typeof replySchema,
   { references: [typeof postSchema] }
->
+>;
 
 /* Get */
 export const getPostsSchema: FastifySchema = {
@@ -82,7 +82,7 @@ export const getPostsSchema: FastifySchema = {
       ...replySchema
     }
   }
-}
+};
 
 export const getOnePostSchema: FastifySchema = {
   tags: ['Posts'],
@@ -97,7 +97,7 @@ export const getOnePostSchema: FastifySchema = {
       $ref: 'postNotFound#'
     }
   }
-}
+};
 
 /* Post */
 export const postPostsSchema: FastifySchema = {
@@ -116,7 +116,7 @@ export const postPostsSchema: FastifySchema = {
       ...postSchema
     }
   }
-}
+};
 
 /* Put */
 export const putPostsSchema: FastifySchema = {
@@ -134,7 +134,7 @@ export const putPostsSchema: FastifySchema = {
       $ref: 'postNotFound#'
     }
   }
-}
+};
 
 /* Delete */
 export const deletePostsSchema: FastifySchema = {
@@ -151,4 +151,4 @@ export const deletePostsSchema: FastifySchema = {
       $ref: 'postNotFound#'
     }
   }
-}
+};

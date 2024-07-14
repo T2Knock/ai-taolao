@@ -1,6 +1,6 @@
-import fp from 'fastify-plugin'
-import swagger from '@fastify/swagger'
-import swaggerUi from '@fastify/swagger-ui'
+import fp from 'fastify-plugin';
+import swagger from '@fastify/swagger';
+import swaggerUi from '@fastify/swagger-ui';
 
 export default fp(async (fastify) => {
   fastify.register(swagger, {
@@ -17,6 +17,6 @@ export default fp(async (fastify) => {
       ]
     },
     hideUntagged: true
-  })
-  fastify.register(swaggerUi)
-})
+  });
+  fastify.register(swaggerUi);
+});

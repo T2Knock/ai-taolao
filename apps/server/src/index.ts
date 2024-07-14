@@ -1,6 +1,6 @@
-import { join } from 'path'
-import Fastify from 'fastify'
-import autoLoad from '@fastify/autoload'
+import { join } from 'path';
+import Fastify from 'fastify';
+import autoLoad from '@fastify/autoload';
 
 const fastify = Fastify({
   logger: {
@@ -14,22 +14,22 @@ const fastify = Fastify({
       }
     }
   }
-})
+});
 fastify.register(autoLoad, {
   dir: join(__dirname, 'plugins')
-})
+});
 
 fastify.register(autoLoad, {
   dir: join(__dirname, 'routes')
-})
+});
 
 const start = async () => {
   try {
-    await fastify.listen({ port: 3000 })
+    await fastify.listen({ port: fastify.config.port });
   } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
+    fastify.log.error(err);
+    process.exit(1);
   }
-}
+};
 
-start()
+start();
