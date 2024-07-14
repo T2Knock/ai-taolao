@@ -6,7 +6,7 @@ const schema = {
   required: ['PORT'],
   properties: {
     PORT: {
-      type: 'string',
+      type: 'number',
       default: 4000
     }
   }
@@ -26,4 +26,6 @@ export default fp(async (fastify) => {
     fastify.log.info(fastify.config);
     fastify.log.info(fastify.getEnvs());
   });
+
+  await fastify.after();
 });

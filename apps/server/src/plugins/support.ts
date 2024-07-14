@@ -17,5 +17,8 @@ export default fp<SupportPluginOptions>(async (fastify) => {
 declare module 'fastify' {
   export interface FastifyInstance {
     someSupport(): string;
+    config: {
+      PORT: number;
+    };
   }
 }

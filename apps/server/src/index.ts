@@ -25,7 +25,8 @@ fastify.register(autoLoad, {
 
 const start = async () => {
   try {
-    await fastify.listen({ port: fastify.config.port });
+    await fastify.ready();
+    await fastify.listen({ port: fastify.config.PORT });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
