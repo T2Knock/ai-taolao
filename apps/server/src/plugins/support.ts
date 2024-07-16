@@ -1,6 +1,5 @@
 import fp from 'fastify-plugin';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SupportPluginOptions {
   // Specify Support plugin options here
 }
