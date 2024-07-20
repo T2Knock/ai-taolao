@@ -1,40 +1,62 @@
+import { STANDARD } from '@/constants/request';
+import { handleServerError } from '@/helpers/errors.helpers';
 import { type RouteHandler } from 'fastify';
-import type { Params, Querystring, Body, Reply, PostNotFound } from './schema';
 import { posts } from './posts';
+import type { Body, Params, PostNotFound, Querystring, Reply } from './schema';
 
 export const getPostsHandler: RouteHandler<{
   Querystring: Querystring;
   Reply: Reply;
 }> = async function (req, reply) {
-  const { deleted } = req.query;
-  if (deleted !== undefined) {
-    const filteredPosts = posts.filter((post) => post.deleted === deleted);
-    reply.send({ posts: filteredPosts });
-  } else reply.send({ posts });
+  try {
+    const { deleted } = req.query;
+
+    if (!deleted) {
+      const filteredPosts = posts.filter((post) => post.deleted === deleted);
+      reply.send({ posts: filteredPosts });
+    }
+
+    reply.send({ posts });
+  } catch (error) {
+    handleServerError(reply, error);
+  }
 };
 
 export const getOnePostHandler: RouteHandler<{
   Params: Params;
   Reply: Reply | PostNotFound;
 }> = async function (req, reply) {
-  const { postid } = req.params;
-  const post = posts.find((p) => p.id == postid);
-  if (post) reply.send({ posts: [post] });
-  else reply.code(404).send({ error: 'Post not found' });
+  try {
+    const { postid } = req.params;
+    const post = posts.find((p) => p.id == postid);
+
+    if (post) reply.send({ posts: [post] });
+
+    reply.notFound('Post not found');
+  } catch (error) {
+    handleServerError(reply, error);
+  }
 };
 
 export const postPostsHandler: RouteHandler<{
   Body: Body;
   Reply: Body;
 }> = async function (req, reply) {
-  const newPostID = posts.length + 1;
-  const newPost = {
-    id: newPostID,
-    ...req.body
-  };
-  posts.push(newPost);
-  console.log(posts);
-  reply.code(201).header('Location', `/posts/${newPostID}`).send(newPost);
+  try {
+    const newPostID = posts.length + 1;
+    const newPost = {
+      id: newPostID,
+      ...req.body
+    };
+    posts.push(newPost);
+
+    reply
+      .code(STANDARD.CREATED.statusCode)
+      .header('Location', `/posts/${newPostID}`)
+      .send(newPost);
+  } catch (error) {
+    handleServerError(reply, error);
+  }
 };
 
 export const putPostsHandler: RouteHandler<{
@@ -42,15 +64,19 @@ export const putPostsHandler: RouteHandler<{
   Body: Body;
   Reply: PostNotFound;
 }> = async function (req, reply) {
-  const { postid } = req.params;
-  const post = posts.find((p) => p.id == postid);
-  if (post) {
-    post.title = req.body.title;
-    post.content = req.body.content;
-    post.tags = req.body.tags;
-    reply.code(204);
-  } else {
-    reply.code(404).send({ error: 'Post not found' });
+  try {
+    const { postid } = req.params;
+    const post = posts.find((p) => p.id == postid);
+    if (post) {
+      post.title = req.body.title;
+      post.content = req.body.content;
+      post.tags = req.body.tags;
+      reply.code(STANDARD.NO_CONTENT.statusCode);
+    }
+
+    reply.notFound('Post not found');
+  } catch (error) {
+    handleServerError(reply, error);
   }
 };
 
@@ -58,12 +84,17 @@ export const deletePostsHandler: RouteHandler<{
   Params: Params;
   Reply: PostNotFound;
 }> = async function (req, reply) {
-  const { postid } = req.params;
-  const post = posts.find((p) => p.id == postid);
-  if (post) {
-    post.deleted = true;
-    reply.code(204);
-  } else {
-    reply.code(404).send({ error: 'Post not found' });
+  try {
+    const { postid } = req.params;
+    const post = posts.find((p) => p.id == postid);
+
+    if (post) {
+      post.deleted = true;
+      reply.code(STANDARD.NO_CONTENT.statusCode);
+    }
+
+    reply.notFound('Post not found');
+  } catch (error) {
+    handleServerError(reply, error);
   }
 };

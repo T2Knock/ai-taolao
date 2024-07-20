@@ -21,7 +21,7 @@ export const ERRORS = {
   unauthorizedAccess: new AppError('Unauthorized access', 401)
 };
 
-export function handleServerError(reply: FastifyReply, error: Error) {
+export function handleServerError(reply: FastifyReply, error: unknown) {
   if (error instanceof AppError) {
     return reply.status(error.statusCode).send({ message: error.message });
   }
