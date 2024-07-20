@@ -49,6 +49,7 @@
     "thread-stream": "3.1.0",
     "tiny-glob": "0.2.9",
     "tsx": "4.16.2",
+    "type-fest": "^4.22.1",
     "typescript": "5.5.3",
     "typescript-eslint": "^7.16.1"
   }
