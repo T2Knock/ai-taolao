@@ -2,7 +2,7 @@ import { STANDARD } from '@/constants/request';
 import { handleServerError } from '@/helpers/errors.helpers';
 import { type RouteHandler } from 'fastify';
 import { posts } from './posts';
-import type { Body, Params, PostNotFound, Querystring, Reply } from './schema';
+import { Querystring, Reply, Params, PostNotFound, Body } from '@/schemas';
 
 export const getPostsHandler: RouteHandler<{
   Querystring: Querystring;
