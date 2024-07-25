@@ -4,7 +4,7 @@ import {
   postPostsHandler,
   putPostsHandler,
   deletePostsHandler
-} from '@/controllers';
+} from '@/controllers/api';
 import {
   postSchema,
   postNotFoundSchema,
