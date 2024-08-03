@@ -1,6 +1,7 @@
 import { join } from 'path';
 import Fastify from 'fastify';
 import autoLoad from '@fastify/autoload';
+import { WebsocketHelper } from './helpers/websocket.helper';
 
 const fastify = Fastify({
   logger: {
@@ -15,6 +16,7 @@ const fastify = Fastify({
     }
   }
 });
+
 fastify.register(autoLoad, {
   dir: join(__dirname, 'plugins')
 });
@@ -23,9 +25,15 @@ fastify.register(autoLoad, {
   dir: join(__dirname, 'routes')
 });
 
+const initHelpers = async () => {
+  WebsocketHelper.initSocket(fastify);
+};
+
 const start = async () => {
   try {
     await fastify.ready();
+    await initHelpers();
+
     await fastify.listen({ port: fastify.config.PORT });
   } catch (err) {
     fastify.log.error(err);

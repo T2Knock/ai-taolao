@@ -3,7 +3,12 @@
   "extends": "../../packages/typescript-config/node-app.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

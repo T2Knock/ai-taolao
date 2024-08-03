@@ -1,4 +1,4 @@
-import fastifyEnv from '@fastify/env';
+import fastifyEnv, { FastifyEnvOptions } from '@fastify/env';
 import fp from 'fastify-plugin';
 
 const schema = {
@@ -16,7 +16,12 @@ const options = {
   schema: schema
 };
 
-export default fp(async (fastify) => {
+/**
+ * @fastify/env Fastify plugin to check environment variables.
+ *
+ * @see https://github.com/fastify/fastify-env
+ */
+export default fp<FastifyEnvOptions>(async (fastify) => {
   fastify.register(fastifyEnv, options).ready((err) => {
     if (err) {
       fastify.log.error(err);
