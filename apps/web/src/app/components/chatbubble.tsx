@@ -1,9 +1,9 @@
-const Navbar = () => {
+const Conversation = () => {
   return (
     <div>
 <div className="chat chat-start">
   <div className="chat-bubble">
-    Hello
+    Hello How can I help you today?
     <br />
     Hi
   </div>
@@ -14,3 +14,4 @@ const Navbar = () => {
     </div>
   );
 }
+export default Conversation;
