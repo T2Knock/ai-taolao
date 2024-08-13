@@ -2,6 +2,7 @@ import { join } from 'path';
 import Fastify from 'fastify';
 import autoLoad from '@fastify/autoload';
 import { WebsocketHelper } from './helpers/websocket.helper';
+import { OpenAIHelper } from './helpers/openai.helpers';
 
 const fastify = Fastify({
   logger: {
@@ -27,6 +28,7 @@ fastify.register(autoLoad, {
 
 const initHelpers = async () => {
   WebsocketHelper.initSocket(fastify);
+  OpenAIHelper.init(fastify);
 };
 
 const start = async () => {

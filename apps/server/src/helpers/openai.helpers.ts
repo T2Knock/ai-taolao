@@ -16,8 +16,11 @@ class OpenAIHelper {
 
   public static async getResponse() {
     return await this.openAI.chat.completions.create({
-      messages: [{ role: 'user', content: 'Say this is a test' }],
-      model: 'gpt-3.5-turbo'
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: 'Say this is a test' }
+      ],
+      model: 'gpt-4o-mini'
     });
   }
 }
