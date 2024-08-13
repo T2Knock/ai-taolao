@@ -14,13 +14,14 @@ class OpenAIHelper {
     return this.openAI;
   }
 
-  public static async getResponse() {
+  public static async getResponse(message: string, stream = false) {
     return await this.openAI.chat.completions.create({
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: 'Say this is a test' }
+        { role: 'user', content: message }
       ],
-      model: 'gpt-4o-mini'
+      model: 'gpt-4o-mini',
+      stream
     });
   }
 }
