@@ -5,6 +5,9 @@ class OpenAIHelper {
   private static openAI: OpenAI;
 
   static init(fastify: FastifyInstance) {
+    const { mockOpenAIResponse } = require('openai-api-mock');
+    mockOpenAIResponse();
+
     this.openAI = new OpenAI({
       apiKey: fastify.config.OPENAI_API_KEY
     });
