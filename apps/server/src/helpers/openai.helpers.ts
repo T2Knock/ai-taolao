@@ -5,9 +5,6 @@ class OpenAIHelper {
   private static openAI: OpenAI;
 
   static init(fastify: FastifyInstance) {
-    const { mockOpenAIResponse } = require('openai-api-mock');
-    mockOpenAIResponse();
-
     this.openAI = new OpenAI({
       apiKey: fastify.config.OPENAI_API_KEY
     });
@@ -17,14 +14,14 @@ class OpenAIHelper {
     return this.openAI;
   }
 
-  public static async getResponse(message: string, stream = false) {
+  public static async getCompletionStream(message: string) {
     return await this.openAI.chat.completions.create({
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: message }
       ],
       model: 'gpt-4o-mini',
-      stream
+      stream: true
     });
   }
 }

@@ -1,7 +1,7 @@
 import { join } from 'path';
 import Fastify from 'fastify';
 import autoLoad from '@fastify/autoload';
-import { WebsocketHelper } from './helpers/websocket.helper';
+import { SocketIOHelper } from './helpers/socket-io.helper';
 import { OpenAIHelper } from './helpers/openai.helpers';
 
 const fastify = Fastify({
@@ -27,7 +27,7 @@ fastify.register(autoLoad, {
 });
 
 const initHelpers = async () => {
-  WebsocketHelper.initSocket(fastify);
+  SocketIOHelper.initSocket(fastify);
   OpenAIHelper.init(fastify);
 };
 
