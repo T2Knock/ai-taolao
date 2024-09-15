@@ -8,7 +8,7 @@
     "build": "rm -rf dist && tsx esbuild.ts",
     "start": "npm run build && node dist",
     "format": "prettier --write src",
-    "lint": "prettier --check src && eslint --ignore-path .gitignore .",
+    "lint": "prettier --check src && eslint",
     "ci": "npm format && npm lint",
     "typecheck": "tsc"
   },
@@ -17,21 +17,33 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^5.10.0",
+    "@fastify/cors": "^9.0.1",
     "@fastify/env": "^4.4.0",
+    "@fastify/etag": "^5.2.0",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/multipart": "^8.3.0",
+    "@fastify/rate-limit": "^9.1.0",
     "@fastify/sensible": "5.6.0",
     "@fastify/swagger": "8.14.0",
     "@fastify/swagger-ui": "^4.0.0",
     "drizzle-orm": "^0.32.0",
     "fastify": "^4.28.1",
     "fastify-plugin": "^4.5.1",
-    "mysql2": "^3.10.2"
+    "mysql2": "^3.10.2",
+    "openai": "^4.55.4",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "@faker-js/faker": "^8.4.1",
     "@types/node": "20.14.10",
+    "@types/ws": "^8.5.11",
     "esbuild": "0.21.0",
     "esbuild-plugin-pino": "2.2.0",
+    "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "globals": "^15.8.0",
     "json-schema-to-ts": "3.1.0",
     "pino": "9.2.0",
     "pino-pretty": "11.2.1",
@@ -39,6 +51,12 @@
     "thread-stream": "3.1.0",
     "tiny-glob": "0.2.9",
     "tsx": "4.16.2",
-    "typescript": "5.5.3"
+    "type-fest": "^4.22.1",
+    "typescript": "5.5.3",
+    "typescript-eslint": "^7.16.1"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^6.0.4"
   }
 }

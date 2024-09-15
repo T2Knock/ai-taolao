@@ -1,4 +1,10 @@
-import type { FastifyInstance } from 'fastify';
+import {
+  getPostsHandler,
+  getOnePostHandler,
+  postPostsHandler,
+  putPostsHandler,
+  deletePostsHandler
+} from '@/controllers';
 import {
   postSchema,
   postNotFoundSchema,
@@ -7,14 +13,8 @@ import {
   postPostsSchema,
   putPostsSchema,
   deletePostsSchema
-} from './schema';
-import {
-  getPostsHandler,
-  getOnePostHandler,
-  postPostsHandler,
-  putPostsHandler,
-  deletePostsHandler
-} from './handler';
+} from '@/schemas';
+import type { FastifyInstance } from 'fastify';
 
 export default async (fastify: FastifyInstance) => {
   fastify.addSchema(postSchema);
