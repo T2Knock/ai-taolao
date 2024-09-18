@@ -5,11 +5,14 @@ import React, { useState } from "react";
 
 export default function HomePage() {
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState<string[]>([]);
   const sendMessage = (event: React.FormEvent) => {
     event.preventDefault();
     if (message.trim() === "") {
       return;
     }
+    console.log("Message sent: ", message);
+    setMessages((prevMessages) => [...prevMessages, message]);
     setMessage("");
   };
 
@@ -19,10 +22,10 @@ export default function HomePage() {
         <Navbar />
       </header>
       <div className="h-5"></div>
-      <Conversation />
-      <div className="absolute bottom-5 w-full bg-[#f2f0f7]">
+      <Conversation messages={messages}/>
+      <div className="absolute bottom-5 w-full p-4">
         <div className="flex justify-center">
-          <form onSubmit={sendMessage}>
+          <form onSubmit={sendMessage} className="flex w-full max-w-5xl space-x-2"> 
             <input
               type="text"
               placeholder="Type here"
@@ -33,7 +36,7 @@ export default function HomePage() {
             <button type="submit" className="btn btn-sm m-2">
               send{" "}
               <svg
-                // xmlns="http://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"

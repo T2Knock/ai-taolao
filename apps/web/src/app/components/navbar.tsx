@@ -1,8 +1,13 @@
+import { useState } from "react"
 const Navbar = () => {
+  const [sidebar, setSidebar] = useState(false);
+  const showSidebar = () => setSidebar(!sidebar);
   return (
     <div className="navbar bg-base-100">
-      <div className="flex-1">
+      <div className="flex-1" onClick={showSidebar}>
         <a className="btn btn-ghost text-xl">aitaolao</a>
+        {/* <nav className={sidebar ? "left-0 transition-350ms" : ""}>
+        <ul className="nav-menu-items" onClick={showSidebar}> */}
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
