@@ -6,8 +6,12 @@ const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1" onClick={showSidebar}>
         <a className="btn btn-ghost text-xl">aitaolao</a>
-        {/* <nav className={sidebar ? "left-0 transition-350ms" : ""}>
-        <ul className="nav-menu-items" onClick={showSidebar}> */}
+        <div className="navbar">
+        </div>
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}></nav> 
+          <ul className="nav-menu-items" onClick={showSidebar}></ul>
+            <li className="navbar-toggle">
+            </li>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
