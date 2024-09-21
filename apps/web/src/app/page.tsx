@@ -17,12 +17,16 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="background relative min-h-screen flex flex-col">
       <header>
         <Navbar />
       </header>
       <div className="h-5"></div>
-      <Conversation messages={messages}/>
+      <div className="flex justify-center w-full px-4">
+        <div className="w-full max-w-5xl">
+          <Conversation messages={messages} />
+        </div>
+      </div>
       <div className="absolute bottom-5 w-full p-4">
         <div className="flex justify-center">
           <form onSubmit={sendMessage} className="flex w-full max-w-5xl space-x-2"> 
@@ -33,7 +37,7 @@ export default function HomePage() {
               onChange={(e) => setMessage(e.target.value)}
               className="input input-bordered w-full max-w-5xl"
             />
-            <button type="submit" className="btn btn-sm m-2">
+            <button type="submit" className="primary btn btn-sm m-2">
               send{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
