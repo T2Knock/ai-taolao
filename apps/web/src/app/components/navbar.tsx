@@ -5,13 +5,11 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1" onClick={showSidebar}>
-        <a className="btn btn-ghost text-xl">aitaolao</a>
+        <a className="btn btn-ghost text-xl">NKchat</a>
         <div className="navbar">
         </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}></nav> 
-          <ul className="nav-menu-items" onClick={showSidebar}></ul>
-            <li className="navbar-toggle">
-            </li>
+        <nav className={sidebar ? "active" : "menu"}></nav> 
+          <ul className="active" onClick={showSidebar}></ul>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
