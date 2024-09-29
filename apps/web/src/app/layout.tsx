@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Lemon, IBM_Plex_Sans_KR } from 'next/font/google'
-import {  } from 'next/font/google'
  
 const lemon = Lemon({
   weight: '400',

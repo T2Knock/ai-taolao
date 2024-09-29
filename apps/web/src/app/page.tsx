@@ -1,11 +1,42 @@
-'use client';
+"use client";
 import Conversation from "./components/chatbubble";
 import Navbar from "./components/navbar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { socket } from "../socket";
 
 export default function HomePage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [transport, setTransport] = useState("N/A");
+
+  useEffect(() => {
+    if (socket.connected) {
+      onConnect();
+    }
+
+    function onConnect() {
+      setIsConnected(true);
+      setTransport(socket.io.engine.transport.name);
+
+      socket.io.engine.on("upgrade", (transport) => {
+        setTransport(transport.name);
+      });
+    }
+
+    function onDisconnect() {
+      setIsConnected(false);
+      setTransport("N/A");
+    }
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
+    return () => {
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
+    };
+  }, []);
   const sendMessage = (event: React.FormEvent) => {
     event.preventDefault();
     if (message.trim() === "") {
@@ -29,7 +60,10 @@ export default function HomePage() {
       </div>
       <div className="absolute bottom-5 w-full p-4">
         <div className="flex justify-center">
-          <form onSubmit={sendMessage} className="flex w-full max-w-5xl space-x-2"> 
+          <form
+            onSubmit={sendMessage}
+            className="flex w-full max-w-5xl space-x-2"
+          >
             <input
               type="text"
               placeholder="Type here"
@@ -56,6 +90,10 @@ export default function HomePage() {
             </button>
           </form>
         </div>
+      </div>
+      <div>
+        <p>Status: {isConnected ? "connected" : "disconnected"}</p>
+        <p>Transport: {transport}</p>
       </div>
     </div>
   );

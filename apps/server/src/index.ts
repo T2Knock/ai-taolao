@@ -44,3 +44,19 @@ const start = async () => {
 };
 
 start();
+
+fastify.io.on('connection', (socket:any) => {
+  console.log('A client connected:', socket.id);
+
+  // Handle incoming messages from clients
+  socket.on('message', (msg:string) => {
+    console.log('Message received:', msg);
+    // Broadcast the message to all connected clients
+    fastify.io.emit('message', msg);
+  });
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
